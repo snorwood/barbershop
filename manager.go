@@ -7,6 +7,7 @@ type Manager struct {
 func NewManager() *Manager {
 	manager := new(Manager)
 	manager.receiveRequestChan = make(chan Request, 100)
+	go Start()
 
 	return manager
 }
@@ -20,4 +21,8 @@ func (self *Manager) Start() {
 		request := <-self.receiveRequestChan
 		request.GetAnswerChannel() <- request.GetMessage()
 	}
+}
+
+func (self *Manager) PrintSup() {
+	print("SUP")
 }
