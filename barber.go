@@ -16,7 +16,7 @@ func NewBarber(recieveRequestChan chan Request) *Barber {
 // Start launches the barber's independent routine (go Start())
 func (self *Barber) Start() {
 	request := <-self.recieveRequestChan
-	response := BaseResponse{request.message}
+	response := BaseResponse{value: request.message, positive: true}
 	request.GetAnswerChannel() <- response
 }
 

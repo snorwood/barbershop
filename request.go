@@ -4,12 +4,13 @@ package barbershop
 type Request struct {
 	answer  chan Response
 	message string
+	target  string
 }
 
 // NewRequest initializes an instance of a Request
-func NewRequest(message string) Request {
+func NewRequest(target, message string) Request {
 	request := Request{}
-
+	request.target = target
 	request.message = message
 
 	request.answer = make(chan Response)
@@ -27,6 +28,10 @@ func (self *Request) GetMessage() string {
 	return self.message
 }
 
+func (self *Request) GetTarget() string {
+	return self.target
+}
+
 // SetAnswerChannel defines the answer channel
 func (self *Request) SetAnswerChannel(answer chan Response) {
 	self.answer = answer
@@ -34,7 +39,8 @@ func (self *Request) SetAnswerChannel(answer chan Response) {
 
 // BaseResponse is a default struct that satisfies the Response interface
 type BaseResponse struct {
-	value interface{}
+	value    interface{}
+	positive bool
 }
 
 func (self BaseResponse) SetValue(value interface{}) {
@@ -43,4 +49,12 @@ func (self BaseResponse) SetValue(value interface{}) {
 
 func (self BaseResponse) GetValue() interface{} {
 	return self.value
+}
+
+func (self BaseResponse) SetPositive(positive bool) {
+	self.positive = positive
+}
+
+func (self BaseResponse) GetPositive() interface{} {
+	return self.positive
 }

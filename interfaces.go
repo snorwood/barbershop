@@ -4,3 +4,8 @@ package barbershop
 type Response interface {
 	GetValue() interface{}
 }
+
+type Agent interface {
+	SetRecieveRequestChan(recieveRequestChan chan Request)
+	Start()
+}
