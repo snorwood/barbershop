@@ -1,0 +1,25 @@
+{
+    "folders":
+    [
+        {
+            "path": "main",
+        },
+        {
+            "path": ".",
+            "name": "Documentation",
+            "folder_exclude_patterns": ["main"],
+            "file_exclude_patterns": ["*.sublime-project"],
+        }
+    ],
+    "settings":
+    {
+        "tab_size": 8
+    },
+    "build_systems":
+    [
+        {
+            "name": "List",
+            "shell_cmd": "ls -l"
+        }
+    ]
+}

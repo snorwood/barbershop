@@ -1,0 +1,1171 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"sub",
+				"Subscription	struct ʈ"
+			],
+			[
+				"Sub",
+				"Subscriber	struct ʈ"
+			],
+			[
+				"subs",
+				"Subscriber	struct ʈ"
+			],
+			[
+				"T",
+				"target	string ν"
+			],
+			[
+				"Res",
+				"BaseResponse	struct ʈ"
+			],
+			[
+				"cus",
+				"Customer	*Customer ν"
+			],
+			[
+				"Even",
+				"EventListener	struct ʈ"
+			],
+			[
+				"Eve",
+				"EventBroadcaster	struct ʈ"
+			],
+			[
+				"event",
+				"EventBroadcaster	chan Event ʈ"
+			],
+			[
+				"subscri",
+				"subscriptions	[]EventBroadcaster ν"
+			],
+			[
+				"Event",
+				"EventBroadcaster	struct ʈ"
+			],
+			[
+				"even",
+				"EventManager	struct ʈ"
+			],
+			[
+				"RunClass",
+				"RunClassHeapTests"
+			],
+			[
+				"bar",
+				"barbershop	*BarberShop ν"
+			],
+			[
+				"barber",
+				"BarberShop	struct ʈ"
+			],
+			[
+				"Bar",
+				"BarberState	interface ¡"
+			],
+			[
+				"cu",
+				"CustomerSitsDown	struct ʈ"
+			],
+			[
+				"print",
+				"Println	n int, err error ƒ"
+			],
+			[
+				"y",
+				"y"
+			],
+			[
+				"good",
+				"goodx"
+			],
+			[
+				"Pri",
+				"PriorityQueue"
+			],
+			[
+				"to",
+				"toRemove"
+			],
+			[
+				"B",
+				"BinarySearchTree"
+			],
+			[
+				"pr",
+				"printNode"
+			],
+			[
+				"del",
+				"delete"
+			],
+			[
+				"dele",
+				"deleteSubtree"
+			],
+			[
+				"capa",
+				"capacity_"
+			],
+			[
+				"P",
+				"PriorityQueue"
+			],
+			[
+				"Pr",
+				"Println	n int, err error ƒ"
+			],
+			[
+				"Cust",
+				"CustomerStanding	struct ʈ"
+			],
+			[
+				"Cu",
+				"CustomerStanding	struct ʈ"
+			],
+			[
+				"Cus",
+				"Customer"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "main/barbershop-test.go",
+			"settings":
+			{
+				"buffer_size": 384,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "barber.go",
+			"settings":
+			{
+				"buffer_size": 872,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "barbershop.sublime-project",
+			"settings":
+			{
+				"buffer_size": 390,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "customer.go",
+			"settings":
+			{
+				"buffer_size": 589,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "interfaces.go",
+			"settings":
+			{
+				"buffer_size": 247,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "manager.go",
+			"settings":
+			{
+				"buffer_size": 1500,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "README.md",
+			"settings":
+			{
+				"buffer_size": 115,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "request.go",
+			"settings":
+			{
+				"buffer_size": 1651,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "Packages/User/go.sublime-build",
+	"command_palette":
+	{
+		"height": 185.0,
+		"selected_items":
+		[
+			[
+				"packdi",
+				"Package Control: Disable Package"
+			],
+			[
+				"packin",
+				"Package Control: Install Package"
+			],
+			[
+				"GoSublime: ",
+				"GoSublime: Browse Declarations"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Discover Packages"
+			],
+			[
+				"pack in",
+				"Package Control: Install Package"
+			],
+			[
+				"list p",
+				"Package Control: List Packages"
+			],
+			[
+				"pack e",
+				"Package Control: Enable Package"
+			],
+			[
+				"pack dis",
+				"Package Control: Disable Package"
+			],
+			[
+				"soda",
+				"GoSublime: Do a sanity check"
+			],
+			[
+				"pac",
+				"Package Control: Enable Package"
+			],
+			[
+				"package controll",
+				"Package Control: Disable Package"
+			],
+			[
+				"python",
+				"Set Syntax: Python"
+			],
+			[
+				"setsyntaxgosu	",
+				"Set Syntax: GoSublime: Go"
+			],
+			[
+				"setsyngo",
+				"Set Syntax: Go"
+			],
+			[
+				"syntax gosublime",
+				"Set Syntax: GoSublime: Go"
+			]
+		],
+		"width": 450.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/Steven Norwood/Documents/Go/src/github.com/snorwood/barbershop/barbershop.sublime-project",
+		"/C/Users/Steven Norwood/AppData/Roaming/Sublime Text 3/Packages/GoSublime/GoSublime.sublime-build",
+		"/C/Users/Steven Norwood/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/Steven Norwood/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/Steven Norwood/AppData/Roaming/Sublime Text 3/Installed Packages/Theme - Soda.sublime-package",
+		"/C/Users/Steven Norwood/AppData/Roaming/Sublime Text 3/Packages/User/bh_core.sublime-settings",
+		"/C/Users/Steven Norwood/AppData/Roaming/Sublime Text 3/Packages/Theme - Soda/Soda Dark 3.sublime-theme",
+		"/C/Users/Steven Norwood/AppData/Roaming/Sublime Text 3/Packages/BracketHighlighter/bh_core.py",
+		"/C/Users/Steven Norwood/Desktop/test.py",
+		"/C/Users/Steven Norwood/Documents/Go/src/github.com/snorwood/barbershop/interfaces.go",
+		"/C/Users/Steven Norwood/Documents/Go/src/github.com/snorwood/barbershop/README.md",
+		"/C/Users/Steven Norwood/Documents/Go/src/github.com/snorwood/barbershop/request.go",
+		"/C/Users/Steven Norwood/Documents/Go/src/github.com/snorwood/barbershop/manager.go",
+		"/C/Users/Steven Norwood/Documents/Go/barbershop-test.go",
+		"/C/Users/Steven Norwood/AppData/Roaming/Sublime Text 3/Packages/User/go.sublime-build",
+		"/C/Users/Steven Norwood/Documents/Go/src/github.com/snorwood/barbershop/customer.go",
+		"/C/Users/Steven Norwood/Documents/Go/src/github.com.snorwood/barbershop/customer.go",
+		"/C/Users/Steven Norwood/Documents/Go/src/github.com.snorwood/barbershop/manager.go",
+		"/C/Users/Steven Norwood/Documents/Go/src/github.com.snorwood/barbershop/request.go",
+		"/C/Users/Steven Norwood/Documents/Go/src/github.com.snorwood/barbershop/README.md",
+		"/C/Users/Steven Norwood/Documents/Go/test.go",
+		"/C/Users/Steven Norwood/Documents/Go/src/github.com.snorwood/barbershop/barbershop.go",
+		"/C/Users/Steven Norwood/Documents/Go/src/github.com.snorwood/barbershop/eventmanager.go",
+		"/C/Users/Steven Norwood/Documents/Go/src/github.com.snorwood/barbershop/event.go",
+		"/C/Users/Steven Norwood/Documents/University/Spring 2013/Barbershop/main.go",
+		"/C/Users/Steven Norwood/Documents/Go/src/github.com.snorwood/barbershop/eventlistener.go",
+		"/C/Users/Steven Norwood/Documents/Go/src/github.com.snorwood/barbershop/eventbroadcaster.go",
+		"/E/Users/Steven/Documents/University/Spring 2013/Machine Learning/PocketAlgorithm.py",
+		"/E/Users/Steven/Documents/University/Spring 2013/Data Structures and Algorithms/Lab 3 - Cary/main.cpp",
+		"/E/Users/Steven/Documents/University/Spring 2013/Data Structures and Algorithms/Lab 3 - Cary/PriorityQueue.hpp",
+		"/E/Users/Steven/Documents/University/Spring 2013/Data Structures and Algorithms/Lab 3/PriorityQueue.cpp",
+		"/E/Users/Steven/Documents/University/Spring 2013/Data Structures and Algorithms/Lab 3 - Cary/PriorityQueue.cpp",
+		"/E/Users/Steven/Documents/University/Spring 2013/Data Structures and Algorithms/Lab 3/BinarySearchTree.cpp",
+		"/C/Users/Steven Norwood/Documents/University/Spring 2013/Data Structures and Algorithms/Lab 2/main.cpp",
+		"/E/Users/Steven/Documents/University/Spring 2013/Data Structures and Algorithms/Lab 3/main.cpp",
+		"/E/Users/Steven/Documents/University/Spring 2013/Data Structures and Algorithms/Lab 3/PriorityQueue.hpp",
+		"/C/Users/Steven Norwood/Documents/Go/src/github.com.snorwood/barbershop/state.go",
+		"/C/Users/Steven Norwood/Documents/Go/src/github.com.snorwood/barbershop/barber.go",
+		"/E/Users/Steven/Documents/University/Spring 2013/Barbershop/barbershoptest.go",
+		"/E/Users/Steven/Documents/University/Spring 2013/Barbershop/barbertest.go",
+		"/C/Users/Steven Norwood/Documents/Go/src/github.com.snorwood/barbershop/test.go",
+		"/C/Users/Steven Norwood/AppData/Roaming/Sublime Text 3/Packages/GoSublime/CHANGELOG.md",
+		"/E/Users/Steven/Documents/University/Spring 2013/Barbershop/main.go",
+		"/C/Users/Steven Norwood/Documents/Go/src/github.com.snorwood/barbershop/queue.go",
+		"/E/Users/Steven/Documents/University/Spring 2013/Machine Learning/pla.py",
+		"/E/Users/Steven/Documents/University/Spring 2013/Data Structures and Algorithms/Lab 3/BinarySearchTree.hpp",
+		"/E/Users/Steven/Documents/University/Spring 2013/Data Structures and Algorithms/Lab 3/Lab3Tests.hpp",
+		"/E/Users/Steven/Documents/University/Spring 2013/Data Structures and Algorithms/Lab 1/DoublyLinkedList.cpp",
+		"/E/Users/Steven/Documents/University/Spring 2013/Data Structures and Algorithms/Lab 3/mainbst.cpp",
+		"/E/Users/Steven/Documents/University/Spring 2013/Data Structures and Algorithms/Lab 3/mainheap.cpp",
+		"/C/Users/Steven Norwood/Documents/University/Spring 2013/Data Structures and Algorithms/Lab 3/main.cpp",
+		"/C/Users/Steven Norwood/Documents/University/Spring 2013/Data Structures and Algorithms/Lab 3/PriorityQueue.hpp",
+		"/C/Users/Steven Norwood/Documents/University/Spring 2013/Data Structures and Algorithms/Lab 3/maintest.cpp",
+		"/C/Users/Steven Norwood/Documents/University/Spring 2013/Data Structures and Algorithms/Lab 3/PriorityQueue.cpp",
+		"/C/Users/Steven Norwood/Documents/University/Spring 2013/Data Structures and Algorithms/Lab 2/DynamicStack.cpp",
+		"/C/Users/Steven Norwood/Desktop/googlebutton.html",
+		"/C/Users/Steven Norwood/Desktop/googlebutton.html.txt",
+		"/C/Users/Steven Norwood/AppData/Roaming/Sublime Text 3/Packages/GoSublime/settings/GoSublime-Go.sublime-settings",
+		"/C/Users/Steven Norwood/Documents/Euler/Euler51.go",
+		"/E/Users/Steven/AppData/Roaming/Sublime Text 3/Packages/User/go.sublime-build",
+		"/C/Users/Steven Norwood/Documents/University/Spring 2013/Data Structures and Algorithms/Lab 2/CircularQueue.cpp"
+	],
+	"find":
+	{
+		"height": 45.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"zoom",
+			"font",
+			"Dark",
+			"outline",
+			"style",
+			"Response",
+			"string",
+			"barber",
+			"Positive",
+			"Value",
+			"value",
+			"Value",
+			"input",
+			"request",
+			"Request",
+			"request",
+			"betterstring",
+			"string",
+			"interface",
+			"{}",
+			"interface",
+			"interface{}",
+			"string",
+			"k",
+			"string",
+			"print",
+			"start",
+			"Question",
+			"question",
+			"pla",
+			"items_",
+			"holder",
+			"cout",
+			"size_",
+			"int",
+			"MAX",
+			"eventBroadcaster",
+			"eventListener",
+			"send",
+			"recieve",
+			"startState",
+			"send",
+			"self",
+			"copy",
+			"inputx",
+			"point",
+			"inputy",
+			"input",
+			"inputx",
+			"plt.plot(inputx, inputy, 'ro')",
+			"good",
+			"goodPointsx",
+			"w",
+			"bady",
+			"w",
+			"4",
+			"10",
+			"level",
+			"level_order",
+			"toRemove",
+			"toChange",
+			"tree.print();",
+			"DoublyLinkedList",
+			"*maxLeft",
+			"*toChange",
+			"queue",
+			";",
+			"left",
+			"parent",
+			"start",
+			"terms",
+			"end",
+			"start",
+			"\\n",
+			"math",
+			"math.",
+			"cout",
+			"index/2",
+			"*Event",
+			"Event",
+			" *",
+			"*",
+			"CustomerStanding",
+			"self",
+			"copy",
+			"Listen",
+			"listen",
+			"Li",
+			"li",
+			"newEvent",
+			"BarberWakesUp",
+			"StandingRoomChanged",
+			"string",
+			"Listen",
+			"print"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"",
+			"Response"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "main/barbershop-test.go",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 384,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								109,
+								109
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close"
+							],
+							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "barber.go",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 872,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								347,
+								347
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close"
+							],
+							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 60.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "barbershop.sublime-project",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 390,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								186,
+								186
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close"
+							],
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "customer.go",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 589,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								358,
+								358
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close"
+							],
+							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "interfaces.go",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 247,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								152,
+								152
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close"
+							],
+							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "manager.go",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1500,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								873,
+								873
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close"
+							],
+							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 399.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "README.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 115,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close"
+							],
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "request.go",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1651,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								694,
+								694
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close"
+							],
+							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 342.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 35.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.9o://C:\\Users\\Steven Norwood\\Documents\\Go":
+	{
+		"height": 124.0
+	},
+	"output.9o://C:\\Users\\Steven Norwood\\Documents\\University\\Spring 2013\\Barbershop":
+	{
+		"height": 124.0
+	},
+	"output.GoSublime-main-output":
+	{
+		"height": 124.0
+	},
+	"output.GoSublime-output":
+	{
+		"height": 124.0
+	},
+	"output.exec":
+	{
+		"height": 309.0
+	},
+	"project": "barbershop.sublime-project",
+	"replace":
+	{
+		"height": 66.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 81.0,
+		"selected_items":
+		[
+			[
+				"print",
+				"print"
+			]
+		],
+		"width": 392.0
+	},
+	"settings":
+	{
+		"last_automatic_layout":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		]
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 203.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
