@@ -2,24 +2,23 @@ package barbershop
 
 // Request is used to make requests from participants to the manager
 type Request struct {
-	answer  chan Response
+	answer  chan<- Subscriber
 	message string
 	target  string
 }
 
 // NewRequest initializes an instance of a Request
-func NewRequest(target string, subscription Subscription) Request {
+func NewRequest(target, message string) Request {
 	request := Request{}
 	request.target = target
 	request.message = message
-
-	request.answer = make(chan Response)
+	request.answer = make(chan Subscriber)
 
 	return request
 }
 
 // GetAnswerChannel returns the channel back to the issuer of the request
-func (self *Request) GetAnswerChannel() chan Response {
+func (self *Request) GetAnswerChannel() chan<- Subscriber {
 	return self.answer
 }
 
@@ -33,25 +32,8 @@ func (self *Request) GetTarget() string {
 }
 
 // SetAnswerChannel defines the answer channel
-func (self *Request) SetAnswerChannel(answer chan Response) {
+func (self *Request) SetAnswerChannel(answer chan<- Subscriber) {
 	self.answer = answer
-}
-
-type Subscriber struct {
-	send          chan<- string
-	recieve       <-chan string
-	stopRecieving chan<- bool
-}
-
-func NewSubscriber() Subscriber {
-
-}
-
-type Subscription struct {
-	getSubscription   chan chan string
-	getSubscriber     chan string
-	closeSubscription chan bool
-	closeSubscriber   chan bool
 }
 
 // BaseResponse is a default struct that satisfies the Response interface

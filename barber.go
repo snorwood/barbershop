@@ -16,10 +16,13 @@ func NewBarber(recieveRequestChan chan Request) *Barber {
 // Start launches the barber's independent routine (go Start())
 func (self *Barber) Start() {
 	request := <-self.recieveRequestChan
-	response := BaseResponse{value: request.message, positive: true}
 	subscriber := NewSubscriber()
-	subscription := NewSubscription(Subscriber)
-	request.GetAnswerChannel() <- subscription
+	SendSubscriber(subscriber, request.GetAnswerChannel())
+	subscriber.Send <- "Hello"
+	<-subscriber.StopSending
+	close(subscriber.Send)
+	subscriber.StopReceiving <- true
+	close(subscriber.StopReceiving)
 }
 
 // SetRecieveRequestChan defines the channel the barber recieves requests on
