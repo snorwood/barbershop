@@ -17,7 +17,9 @@ func NewBarber(recieveRequestChan chan Request) *Barber {
 func (self *Barber) Start() {
 	request := <-self.recieveRequestChan
 	response := BaseResponse{value: request.message, positive: true}
-	request.GetAnswerChannel() <- response
+	subscriber := NewSubscriber()
+	subscription := NewSubscription(Subscriber)
+	request.GetAnswerChannel() <- subscription
 }
 
 // SetRecieveRequestChan defines the channel the barber recieves requests on

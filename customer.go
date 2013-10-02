@@ -13,8 +13,8 @@ func NewCustomer(sendRequestChan chan Request) *Customer {
 }
 
 // SendRequest makes a request to the customers manager i.e. barbershop
-func (self *Customer) SendRequest(req Request) chan Response {
-	answer := make(chan Response)
+func (self *Customer) SendRequest(req Request) chan Subscription {
+	answer := make(chan Subscription)
 	req.SetAnswerChannel(answer)
 	self.sendRequestChan <- req
 	return answer

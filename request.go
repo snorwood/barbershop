@@ -8,7 +8,7 @@ type Request struct {
 }
 
 // NewRequest initializes an instance of a Request
-func NewRequest(target, message string) Request {
+func NewRequest(target string, subscription Subscription) Request {
 	request := Request{}
 	request.target = target
 	request.message = message
@@ -35,6 +35,23 @@ func (self *Request) GetTarget() string {
 // SetAnswerChannel defines the answer channel
 func (self *Request) SetAnswerChannel(answer chan Response) {
 	self.answer = answer
+}
+
+type Subscriber struct {
+	send          chan<- string
+	recieve       <-chan string
+	stopRecieving chan<- bool
+}
+
+func NewSubscriber() Subscriber {
+
+}
+
+type Subscription struct {
+	getSubscription   chan chan string
+	getSubscriber     chan string
+	closeSubscription chan bool
+	closeSubscriber   chan bool
 }
 
 // BaseResponse is a default struct that satisfies the Response interface
