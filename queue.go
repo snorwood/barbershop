@@ -5,23 +5,34 @@ import (
 )
 
 type node struct {
-	prev  *interface{}
+	prev  *node
 	value interface{}
-	next  *interface{}
+	next  *node
 }
 
 type GeneralQueue struct {
-	head     node
-	tail     node
+	head     *node
+	tail     *node
 	size     int
 	capacity int
 }
 
+func NewGeneralQueue(capacity int) *GeneralQueue {
+	generalQueue := GeneralQueue{
+		head: nil,
+		tail: nil,
+		size: 0,
+		capacity: capacity
+	}
+
+	return &GeneralQueue
+}
+
 func (self *GeneralQueue) Enqueue(value interface{}) error {
 	if self.size < self.capacity {
-		newNode := Node{
-			next:  null,
-			prev:  null,
+		newNode := &node{
+			next:  nil,
+			prev:  nil,
 			value: value,
 		}
 
@@ -36,32 +47,51 @@ func (self *GeneralQueue) Enqueue(value interface{}) error {
 		self.tail = newNode
 
 		if self.size == 0 {
-			head = newNode
+			self.head = newNode
 		}
-		size++
+		self.size++
 
 		return nil
 	}
 
-	return QueueOverflowException{index: size, size: size}
+	return QueueOverflow{index: self.size, size: self.size}
 }
 
-func (self *GeneralQueue) Dequeue() (interface{}, err) {
+func (self *GeneralQueue) Dequeue() (interface{}, error) {
 	if self.size > 0 {
 		frontNode := self.head.next
-		head.next = frontNode.next
-		size--
+		self.head.next = frontNode.next
+		self.size--
 
-		return frontNode.value
+		if self.size == 0 {
+			self.tail = nil
+		}
+
+		return frontNode.value, nil
 	}
+
+	return nil, EmptyQueue{}
 }
 
-type QueueOverflowException struct {
+func (self *GeneralQueue) Peek() (interface{}, error) {
+	if self.size > 0 {
+		return self.head.next.value, nil
+	}
+
+	return nil, EmptyQueue{}
+}
+
+type QueueOverflow struct {
 	index int
 	size  int
-	err   string
 }
 
-func (self QueueOverflowException) Error() string {
-	return fmt.Sprintf("QueueOverflowException: Index (%d) out of range (%d).", self.index, self.size)
+func (self QueueOverflow) Error() string {
+	return fmt.Sprintf("QueueOverflow: Index (%d) out of range (%d).", self.index, self.size)
+}
+
+type EmptyQueue struct{}
+
+func (self EmptyQueue) Error() string {
+	return fmt.Sprintf("EmptyQueue: Dequeue attempted from already empty queue.")
 }

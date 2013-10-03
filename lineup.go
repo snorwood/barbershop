@@ -7,9 +7,7 @@ type chair struct {
 }
 
 type LineUp struct {
-	head     chair
-	capacity int
-	size     int
+	queue GeneralQueue
 }
 
 // func NewLineUp(capacity int) {
@@ -20,6 +18,6 @@ type LineUp struct {
 // 	size = 0
 // }
 
-func Pop() {
+func (self *LineUp) Enqueue(customer Customer) {
 
 }
