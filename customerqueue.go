@@ -11,20 +11,20 @@ func NewCustomerQueue(capacity int) *CustomerQueue {
 	return customerQueue
 }
 
-func (self *CustomerQueue) Enqueue(customer Customer) error {
+func (self *CustomerQueue) Enqueue(customer *Customer) error {
 	return self.queue.Enqueue(customer)
 }
 
-func (self *CustomerQueue) Dequeue() (Customer, error) {
+func (self *CustomerQueue) Dequeue() (*Customer, error) {
 	value, err := self.queue.Dequeue()
-	customer := value.(Customer)
+	customer := value.(*Customer)
 
 	return customer, err
 }
 
-func (self *CustomerQueue) Peek() (Customer, error) {
+func (self *CustomerQueue) Peek() (*Customer, error) {
 	value, err := self.queue.Peek()
-	customer := value.(Customer)
+	customer := value.(*Customer)
 
 	return customer, err
 }
