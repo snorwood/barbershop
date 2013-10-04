@@ -1,22 +1,15 @@
 package barbershop
 
-type chair struct {
-	Occupant Customer
-	Next     *Customer
-	Prev     *Customer
-}
-
 type CustomerQueue struct {
-	queue GeneralQueue
+	queue *GeneralQueue
 }
 
-// func NewLineUp(capacity int) {
-// 	capacity = capacity
-// 	head = new(chair)
-// 	head.Next = null
-// 	head.prev = null
-// 	size = 0
-// }
+func NewCustomerQueue(capacity int) *CustomerQueue {
+	customerQueue := new(CustomerQueue)
+	customerQueue.queue = NewGeneralQueue(capacity)
+
+	return customerQueue
+}
 
 func (self *CustomerQueue) Enqueue(customer Customer) error {
 	return self.queue.Enqueue(customer)
@@ -30,7 +23,7 @@ func (self *CustomerQueue) Dequeue() (Customer, error) {
 }
 
 func (self *CustomerQueue) Peek() (Customer, error) {
-	value, err := self.peek.Dequeue()
+	value, err := self.queue.Peek()
 	customer := value.(Customer)
 
 	return customer, err

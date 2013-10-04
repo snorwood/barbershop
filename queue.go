@@ -19,13 +19,13 @@ type GeneralQueue struct {
 
 func NewGeneralQueue(capacity int) *GeneralQueue {
 	generalQueue := GeneralQueue{
-		head: nil,
-		tail: nil,
-		size: 0,
-		capacity: capacity
+		head:     nil,
+		tail:     nil,
+		size:     0,
+		capacity: capacity,
 	}
 
-	return &GeneralQueue
+	return &generalQueue
 }
 
 func (self *GeneralQueue) Enqueue(value interface{}) error {
@@ -36,16 +36,18 @@ func (self *GeneralQueue) Enqueue(value interface{}) error {
 			value: value,
 		}
 
-		visitor := self.head
+		if self.size > 0 {
+			visitor := self.head
 
-		for index := 0; index < self.size; index++ {
-			visitor = visitor.next
+			for index := 0; index < self.size-1; index++ {
+				visitor = visitor.next
+			}
+
+			visitor.next = newNode
+			newNode.prev = visitor
 		}
 
-		visitor.next = newNode
-		newNode.prev = visitor
 		self.tail = newNode
-
 		if self.size == 0 {
 			self.head = newNode
 		}
@@ -59,8 +61,8 @@ func (self *GeneralQueue) Enqueue(value interface{}) error {
 
 func (self *GeneralQueue) Dequeue() (interface{}, error) {
 	if self.size > 0 {
-		frontNode := self.head.next
-		self.head.next = frontNode.next
+		frontNode := self.head
+		self.head = frontNode.next
 		self.size--
 
 		if self.size == 0 {
@@ -75,7 +77,7 @@ func (self *GeneralQueue) Dequeue() (interface{}, error) {
 
 func (self *GeneralQueue) Peek() (interface{}, error) {
 	if self.size > 0 {
-		return self.head.next.value, nil
+		return self.head.value, nil
 	}
 
 	return nil, EmptyQueue{}

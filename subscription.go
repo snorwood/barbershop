@@ -13,7 +13,7 @@ func NewSubscriber() Subscriber {
 	subscriber.Receive = make(chan string)
 	subscriber.StopReceiving = make(chan bool)
 	subscriber.StopSending = make(chan bool)
-	
+
 	return *subscriber
 }
 
