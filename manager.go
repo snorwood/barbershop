@@ -8,7 +8,7 @@ import (
 
 // Manager runs the communications in the barbershop
 type Manager struct {
-	customers          *CustomerQueue
+	customers          *GeneralQueue
 	receiveRequestChan chan Request
 	sendRequestChan    chan Request
 	barbers            []chan Request
@@ -19,7 +19,7 @@ func NewManager() *Manager {
 	manager := new(Manager)
 	manager.receiveRequestChan = make(chan Request, 100)
 	manager.sendRequestChan = make(chan Request)
-	manager.customers = NewCustomerQueue(10)
+	manager.customers = NewGeneralQueue(10)
 	b := make([]Agent, 3)
 
 	for i, _ := range b {
@@ -63,7 +63,7 @@ func (self *Manager) GetSendRequestChan() chan Request {
 
 // Start initializes the managers separate routine (go Start())
 func (self *Manager) Start() {
-	customerReceive := make(chan *Customer)
+	customerReceive := make(chan chan Request)
 	customerReceiveBackup := customerReceive
 	go customerGenerator(20, customerReceive)
 
@@ -92,15 +92,19 @@ func (self *Manager) redirect(request Request) {
 	}
 }
 
-func customerGenerator(numberOfCustomers int, send chan *Customer) {
+func customerGenerator(numberOfCustomers int, send chan chan Request) {
 	for i := 1; i <= numberOfCustomers; i++ {
+
 		rand.Seed(time.Now().UnixNano())
-		customer := &Customer{}
 		<-time.After(time.Duration(rand.Int31n(4)) * time.Second)
+		ch := make(chan Request)
+		customer := NewCustomer(ch)
+		customer.sendRequestChan = ch
 		select {
-		case send <- customer:
+		case send <- ch:
 			fmt.Printf("Customer %d was seated\n", i)
 		default:
+			fmt.Printf("Customer %d left\n", i)
 		}
 	}
 }
