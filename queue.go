@@ -83,6 +83,14 @@ func (self *GeneralQueue) Peek() (interface{}, error) {
 	return nil, EmptyQueue{}
 }
 
+func (self *GeneralQueue) Size() int {
+	return self.size
+}
+
+func (self *GeneralQueue) Full() bool {
+	return self.size == self.capacity
+}
+
 type QueueOverflow struct {
 	index int
 	size  int

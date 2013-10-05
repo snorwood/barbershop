@@ -28,3 +28,11 @@ func (self *CustomerQueue) Peek() (*Customer, error) {
 
 	return customer, err
 }
+
+func (self *CustomerQueue) Size() int {
+	return self.queue.Size()
+}
+
+func (self *CustomerQueue) Full() bool {
+	return self.queue.Full()
+}

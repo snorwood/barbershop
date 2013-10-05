@@ -29,8 +29,6 @@ func NewManager() *Manager {
 	manager.AddAgents(b)
 	b = nil
 
-	go manager.Start()
-
 	return manager
 }
 
@@ -66,9 +64,17 @@ func (self *Manager) GetSendRequestChan() chan Request {
 // Start initializes the managers separate routine (go Start())
 func (self *Manager) Start() {
 	customerReceive := make(chan *Customer)
+	customerReceiveBackup := customerReceive
 	go customerGenerator(20, customerReceive)
 
 	for {
+		if self.customers.Full() {
+			customerReceive = nil
+			break
+		} else {
+			customerReceive = customerReceiveBackup
+		}
+
 		select {
 		case request := <-self.receiveRequestChan:
 			self.redirect(request)
@@ -87,14 +93,14 @@ func (self *Manager) redirect(request Request) {
 }
 
 func customerGenerator(numberOfCustomers int, send chan *Customer) {
-	for i := 0; i < numberOfCustomers; i++ {
+	for i := 1; i <= numberOfCustomers; i++ {
 		rand.Seed(time.Now().UnixNano())
 		customer := &Customer{}
+		<-time.After(time.Duration(rand.Int31n(4)) * time.Second)
 		select {
 		case send <- customer:
 			fmt.Printf("Customer %d was seated\n", i)
-		case <-time.After(time.Duration(rand.Int31n(10)) * time.Second):
-			fmt.Printf("Customer %d left\n", i)
+		default:
 		}
 	}
 }
