@@ -6,6 +6,6 @@ type Response interface {
 }
 
 type Agent interface {
-	SetRecieveRequestChan(recieveRequestChan chan Request)
+	GetReceiveRequestChan() chan Request
 	Start()
 }

@@ -6,9 +6,9 @@ type Barber struct {
 }
 
 // NewBarber initiallizes an instance of a Barber
-func NewBarber(recieveRequestChan chan Request) *Barber {
+func NewBarber() *Barber {
 	barber := new(Barber)
-	barber.recieveRequestChan = recieveRequestChan
+	barber.recieveRequestChan = make(chan Request)
 
 	return barber
 }
@@ -18,11 +18,15 @@ func (self *Barber) Start() {
 	request := <-self.recieveRequestChan
 	subscriber := NewSubscriber()
 	SendSubscriber(subscriber, request.GetAnswerChannel())
-	subscriber.Send <- "Hello"
-	<-subscriber.StopSending
-	close(subscriber.Send)
-	subscriber.StopReceiving <- true
-	close(subscriber.StopReceiving)
+	select {
+	case message := <-subscriber.Receive:
+		print(message)
+	case <-subscriber.StopReceiving:
+	}
+}
+
+func (self *Barber) GetReceiveRequestChan() chan Request {
+	return self.recieveRequestChan
 }
 
 // SetRecieveRequestChan defines the channel the barber recieves requests on
