@@ -1,0 +1,54 @@
+1.	 Added new Customer 1
+2.	 Barber 0 is gettin' to work on Customer 1
+3.	 Added new Customer 2
+4.	 Barber 1 is gettin' to work on Customer 2
+5.	 Added new Customer 3
+6.	 Barber 2 is gettin' to work on Customer 3
+7.	 Added new Customer 4
+8.	 Customer 4 got in line
+9.	 Added new Customer 5
+10.	 Customer 5 got in line
+11.	 Added new Customer 6
+12.	 Customer 6 got in line
+13.	 Added new Customer 7
+14.	 Customer 7 got in line
+15.	 Added new Customer 8
+16.	 Customer 8 got in line
+17.	 Added new Customer 9
+18.	 Customer 9 got in line
+19.	 Added new Customer 10
+20.	 Customer 10 got in line
+21.	 Added new Customer 11
+22.	 Customer 11 got in line
+23.	 Added new Customer 12
+24.	 Customer 12 got in line
+25.	 Added new Customer 13
+26.	 Customer 13 got in line
+27.	 Added new Customer 14
+28.	 Customer 14 has been turned away
+29.	 Added new Customer 15
+30.	 Customer 15 has been turned away
+31.	 Added new Customer 16
+32.	 Customer 16 has been turned away
+33.	 Added new Customer 17
+34.	 Customer 17 has been turned away
+35.	 Added new Customer 18
+36.	 Customer 18 has been turned away
+37.	 Added new Customer 19
+38.	 Customer 19 has been turned away
+39.	 Added new Customer 20
+40.	 Customer 20 has been turned away
+41.	 Added new Customer 21
+42.	 Customer 21 has been turned away
+43.	 Added new Customer 22
+44.	 Customer 22 has been turned away
+45.	 Added new Customer 23
+46.	 Customer 23 has been turned away
+47.	 Added new Customer 24
+48.	 Customer 24 has been turned away
+49.	 Added new Customer 25
+50.	 Customer 25 has been turned away
+51.	 Added new Customer 26
+52.	 Customer 26 has been turned away
+53.	 Added new Customer 27
+54.	 Customer 27 has been turned away
