@@ -1,0 +1,40 @@
+1.	 Added new Customer 
+2.	 Added new Customer 1
+3.	 Barber 1 is gettin' to work on Customer 1
+4.	 Added new Customer 2
+5.	 Barber 2 is gettin' to work on Customer 2
+6.	 Added new Customer 3
+7.	 Barber 3 is gettin' to work on Customer 3
+8.	 Barber 1 finished haircut on Customer 1
+9.	 Added new Customer 4
+10.	 Barber 1 is snoozin'
+11.	 Barber 1 is gettin' to work on Customer 4
+12.	 Barber 2 finished haircut on Customer 2
+13.	 Barber 2 is snoozin'
+14.	 Added new Customer 5
+15.	 Barber 2 is gettin' to work on Customer 5
+16.	 Added new Customer 6
+17.	 Customer 6 got in line
+18.	 Barber 3 finished haircut on Customer 3
+19.	 Barber 3 is gettin' to work on Customer 6
+20.	 Added new Customer 7
+21.	 Customer 7 got in line
+22.	 Barber 1 finished haircut on Customer 4
+23.	 Barber 1 is gettin' to work on Customer 7
+24.	 Added new Customer 8
+25.	 Customer 8 got in line
+26.	 Barber 3 finished haircut on Customer 6
+27.	 Barber 3 is gettin' to work on Customer 8
+28.	 Barber 2 finished haircut on Customer 5
+29.	 Barber 2 is snoozin'
+30.	 Added new Customer 9
+31.	 Barber 2 is gettin' to work on Customer 9
+32.	 Barber 1 finished haircut on Customer 7
+33.	 Barber 1 is snoozin'
+34.	 Added new Customer 10
+35.	 Barber 1 is gettin' to work on Customer 10
+36.	 Barber 3 finished haircut on Customer 8
+37.	 Barber 3 is snoozin'
+38.	 Barber 2 finished haircut on Customer 9
+39.	 Barber 2 is snoozin'
+40.	 Barber 1 finished haircut on Customer 10
