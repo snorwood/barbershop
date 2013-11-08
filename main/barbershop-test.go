@@ -9,8 +9,35 @@ import (
 )
 
 type Person struct {
-	Busy bool
+	busy bool
 	ID   int
+}
+
+type Barber struct {
+	busy       bool
+	ReturnBusy chan chan bool
+	SetBusy    chan bool
+
+	ID int
+}
+
+func (self *Barber) DataStream() {
+	self.ReturnBusy = make(chan chan bool)
+	self.SetBusy = make(chan bool)
+	for {
+		select {
+		case returnBusy := <-self.ReturnBusy:
+			returnBusy <- self.busy
+		case busy := <-self.SetBusy:
+			self.busy = busy
+		}
+	}
+}
+
+func (self *Barber) GetBusy() bool {
+	c := make(chan bool)
+	self.ReturnBusy <- c
+	return <-c
 }
 
 type MyWriter struct {
@@ -38,7 +65,6 @@ var log *os.File
 var output io.Writer
 
 func spawnCustomer(entrance chan *Person, done chan bool) {
-	fmt.Fprint(output, "Added new Customer ")
 	for i := 1; i <= 10; i++ {
 		random := time.Duration(rand.Int31n(2)+1) * time.Second
 		<-time.After(random)
@@ -50,13 +76,29 @@ func spawnCustomer(entrance chan *Person, done chan bool) {
 	done <- true
 }
 
-func checkBusy(people []*Person) bool {
-	for _, person := range people {
-		if person.Busy {
+func checkBusy(barbers []*Barber) bool {
+	for _, barber := range barbers {
+		if barber.GetBusy() {
 			return true
 		}
 	}
 	return false
+}
+
+func HairCut(barber *Barber, person *Person, doneCutting chan chan *Person) {
+	barber.SetBusy <- true
+	fmt.Fprint(output, "Barber ", barber.ID, " is gettin' to work on Customer ", person.ID)
+	<-time.After(time.Duration(rand.Int31n(3)+3) * time.Second)
+	fmt.Fprint(output, "Barber ", barber.ID, " finished haircut on Customer ", person.ID)
+	barber.SetBusy <- false
+	c := make(chan *Person)
+	doneCutting <- c
+	person = (<-c)
+	if person == nil {
+		fmt.Fprint(output, "Barber ", barber.ID, " is snoozin'")
+	} else {
+		go HairCut(barber, person, doneCutting)
+	}
 }
 
 func main() {
@@ -66,17 +108,18 @@ func main() {
 
 	output = NewMyWriter(os.Stdout, log)
 
-	barbers := make([]*Person, 3)
+	barbers := make([]*Barber, 3)
 	line := make([]*Person, 0, 10)
 
-	entrance := make(chan *Person)
+	entrance := make(chan *Person, 10)
 	doneCutting := make(chan chan *Person)
 	done := make(chan bool)
 	go spawnCustomer(entrance, done)
 	noMoreCustomers := false
 
 	for i := range barbers {
-		barbers[i] = &Person{Busy: false, ID: i + 1}
+		barbers[i] = &Barber{busy: false, ID: i + 1}
+		go barbers[i].DataStream()
 	}
 
 	for !noMoreCustomers || checkBusy(barbers) {
@@ -84,25 +127,9 @@ func main() {
 		case person := <-entrance:
 			spotAvailable := false
 			for _, barber := range barbers {
-				if !barber.Busy {
+				if !barber.GetBusy() {
 					spotAvailable = true
-					var f func()
-					f = func() {
-						barber.Busy = true
-						fmt.Fprint(output, "Barber ", barber.ID, " is gettin' to work on Customer ", person.ID)
-						<-time.After(time.Duration(rand.Int31n(3)+3) * time.Second)
-						fmt.Fprint(output, "Barber ", barber.ID, " finished haircut on Customer ", person.ID)
-						barber.Busy = false
-						c := make(chan *Person)
-						doneCutting <- c
-						person = (<-c)
-						if person == nil {
-							fmt.Fprint(output, "Barber ", barber.ID, " is snoozin'")
-						} else {
-							f()
-						}
-					}
-					go f()
+					go HairCut(barber, person, doneCutting)
 					break
 				}
 			}
