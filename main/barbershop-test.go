@@ -18,6 +18,18 @@ type MyWriter struct {
 	outputs []io.Writer
 }
 
+type SWriter struct {
+	count   int
+	content string
+}
+
+func (self *SWriter) Write(p []byte) (int, error) {
+	self.count += 1
+	self.content += fmt.Sprintf("%d.\t %s\n", self.count, string(p))
+
+	return len(p), nil
+}
+
 func (self *MyWriter) Write(p []byte) (int, error) {
 	self.count += 1
 	s := fmt.Sprintf("%d.\t %s\n", self.count, string(p))
@@ -38,14 +50,14 @@ var log *os.File
 var output io.Writer
 
 type Barber struct {
-	log       string
+	log       *SWriter
 	busy      bool
 	id        int
 	Stop      chan IDGroup
 	Start     chan int
 	TimeSlept chan chan float32
 	IsBusy    chan chan bool
-	Finish    chan bool
+	Finish    chan chan string
 }
 
 func (self *Barber) GoLive() {
@@ -53,9 +65,14 @@ func (self *Barber) GoLive() {
 	finished := false
 	customerID := 0
 	setBusy := make(chan bool)
+	fmt.Fprint(self.log, "Became sentient. My ID is ", self.id)
+	timeBegin := time.Now()
+
 	for !finished {
 		select {
 		case <-haircutTimer:
+			fmt.Fprint(self.log, "Finished cutting customer ", customerID, "'s hair. Cut took ", time.Now().Sub(timeBegin), ".")
+			timeBegin = time.Now()
 			haircutTimer = nil
 			go func(stop chan IDGroup, id IDGroup) {
 				stop <- id
@@ -63,8 +80,10 @@ func (self *Barber) GoLive() {
 			}(self.Stop, IDGroup{self.id, customerID})
 
 		case customerID = <-self.Start:
+			fmt.Fprint(self.log, "Started cutting customer ", customerID, "'s hair. Slept for ", time.Now().Sub(timeBegin), ".")
+			timeBegin = time.Now()
 			self.busy = true
-			haircutTimer = time.After(time.Duration(rand.Int31n(6)+3) * time.Millisecond)
+			haircutTimer = time.After(time.Duration(int(rand.Int31n(int32(haircutBase)))+variance) * time.Second)
 
 		case timeSlept := <-self.TimeSlept:
 			timeSlept <- 0
@@ -74,7 +93,9 @@ func (self *Barber) GoLive() {
 
 		case self.busy = <-setBusy:
 
-		case <-self.Finish:
+		case finish := <-self.Finish:
+			fmt.Fprint(self.log, "Done for the day. Phew!")
+			finish <- self.log.content
 			finished = true
 		}
 	}
@@ -86,16 +107,16 @@ type BarberReader struct {
 	TimeSlept chan chan float32
 	IsBusy    chan chan bool
 	ID        int
-	Finish    chan bool
+	Finish    chan chan string
 }
 
 func newBarber(id int, stop chan IDGroup) *BarberReader {
 	start := make(chan int)
 	timeSlept := make(chan chan float32)
 	isBusy := make(chan chan bool)
-	finish := make(chan bool)
+	finish := make(chan chan string)
 
-	localBarber := BarberReader{
+	localBarber := &BarberReader{
 		Stop:      stop,
 		Start:     start,
 		TimeSlept: timeSlept,
@@ -105,7 +126,7 @@ func newBarber(id int, stop chan IDGroup) *BarberReader {
 	}
 	barber := &Barber{
 		id:        id,
-		log:       "",
+		log:       new(SWriter),
 		busy:      false,
 		Stop:      stop,
 		Start:     start,
@@ -116,11 +137,11 @@ func newBarber(id int, stop chan IDGroup) *BarberReader {
 
 	go barber.GoLive()
 
-	return &localBarber
+	return localBarber
 }
 
 type Customer struct {
-	log        string
+	log        *SWriter
 	id         int
 	TimeWaited chan chan float32
 	Message    chan string
@@ -132,8 +153,7 @@ func (self *Customer) GoLive() {
 		case timeWaited := <-self.TimeWaited:
 			timeWaited <- 0
 		case message := <-self.Message:
-			self.log += message
-			fmt.Println(message)
+			fmt.Fprintln(self.log, message)
 		}
 	}
 }
@@ -149,18 +169,22 @@ func newCustomer(id int) *CustomerReader {
 	message := make(chan string)
 
 	localCustomer := CustomerReader{ID: id, TimeWaited: timeWaited, Message: message}
-	customer := Customer{log: "", id: id, TimeWaited: timeWaited, Message: message}
+	customer := Customer{log: new(SWriter), id: id, TimeWaited: timeWaited, Message: message}
 	go customer.GoLive()
 
 	return &localCustomer
 }
 
-var numBarbers int = 20
+var numCustomers int = 10
+var numBarbers int = 3
+var variance int = 1
+var haircutBase int = 3
+var customerBase int = 1
 
 func main() {
 	stop := make(chan IDGroup)
 	barbers := make([]*BarberReader, 3)
-	for id := 1; id <= 3; id++ {
+	for id := 1; id <= numBarbers; id++ {
 		barbers[id-1] = newBarber(id, stop)
 	}
 
@@ -169,10 +193,10 @@ func main() {
 	customersEntered := 0
 	customersServed := 0
 
-	for customersEntered < numBarbers || customerCount > 0 || !allBarbersFinished(barbers) {
-		// newCustomerTimer := time.After(time.Duration(rand.Int31n(1)+1) * time.Second)
-		newCustomerTimer := time.After(time.Millisecond)
-		if customersEntered >= numBarbers {
+	for customersEntered < numCustomers || customerCount > 0 || !allBarbersFinished(barbers) {
+		newCustomerTimer := time.After(time.Duration(int(rand.Int31n(int32(customerBase)))+variance) * time.Second)
+		//newCustomerTimer := time.After(time.Millisecond)
+		if customersEntered >= numCustomers {
 			newCustomerTimer = nil
 		}
 
@@ -219,10 +243,14 @@ func main() {
 		}
 	}
 
+	finish := make(chan string, numBarbers)
 	for _, barber := range barbers {
-		barber.Finish <- true
+		barber.Finish <- finish
 	}
 
+	for i := 0; i < numBarbers; i++ {
+		fmt.Println(<-finish)
+	}
 }
 
 func RemoveCustomer(customers []*CustomerReader, index int) (*CustomerReader, error) {
