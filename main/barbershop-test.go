@@ -163,12 +163,18 @@ type Customer struct {
 	TimeWaited chan chan float32
 	Message    chan string
 	Log        chan chan string
-	Stop       chan bool
+	Stop       <-chan bool
+	Start      chan int
+	Enter      chan bool
+	LineUp     chan int
 	Kill       chan bool
 }
 
 func (self *Customer) GoLive() {
 	finished := false
+	inLine := false
+	timeBegin := time.Now()
+	stepTimer := timeBegin
 
 	for !finished {
 		select {
@@ -182,7 +188,27 @@ func (self *Customer) GoLive() {
 			logger <- self.log.content
 
 		case <-self.Stop:
-			fmt.Fprint(self.log, "Haircut finished")
+			fmt.Fprint(self.log, "Haircut finished. That took ", int(time.Now().Sub(timeBegin)/time.Second), " seconds total.")
+
+		case id := <-self.Start:
+			if inLine {
+				fmt.Fprint(self.log, "Haircut started with barber ", id, ". No wait :D.")
+			} else {
+				fmt.Fprint(self.log, "Haircut started with barber ", id, ". Waited for ", int(time.Now().Sub(stepTimer)/time.Second), " seconds.")
+				stepTimer = time.Now()
+			}
+			inLine = false
+
+		case <-self.Enter:
+			fmt.Fprint(self.log, "Entered the store at ", time.Now().Format("15:04:05 on Jan 2"), ". My ID is ", self.id, ".")
+
+		case id := <-self.LineUp:
+			if id > 0 {
+				inLine = true
+				fmt.Fprint(self.log, "Got in line at position ", id, ".")
+			} else {
+				fmt.Fprint(self.log, "I was turned away.")
+			}
 
 		case <-self.Kill:
 			finished = true
@@ -196,6 +222,9 @@ type CustomerReader struct {
 	ID         int
 	Log        chan chan string
 	Stop       chan bool
+	Start      chan int
+	Enter      chan bool
+	LineUp     chan int
 	Kill       chan bool
 }
 
@@ -204,6 +233,9 @@ func newCustomer(id int) *CustomerReader {
 	message := make(chan string)
 	log := make(chan chan string)
 	stop := make(chan bool)
+	start := make(chan int)
+	enter := make(chan bool)
+	lineUp := make(chan int)
 	kill := make(chan bool)
 
 	localCustomer := CustomerReader{
@@ -212,6 +244,9 @@ func newCustomer(id int) *CustomerReader {
 		Message:    message,
 		Log:        log,
 		Stop:       stop,
+		Start:      start,
+		Enter:      enter,
+		LineUp:     lineUp,
 		Kill:       kill,
 	}
 	customer := Customer{
@@ -221,6 +256,9 @@ func newCustomer(id int) *CustomerReader {
 		Message:    message,
 		Log:        log,
 		Stop:       stop,
+		Start:      start,
+		Enter:      enter,
+		LineUp:     lineUp,
 		Kill:       kill,
 	}
 
@@ -260,6 +298,7 @@ func main() {
 			customersEntered += 1
 			customer := newCustomer(customersEntered)
 			allCustomers[customersEntered-1] = customer
+			customer.Enter <- true
 			fmt.Println("Customer", customer.ID, "entered.")
 			foundBarber := false
 
@@ -272,20 +311,25 @@ func main() {
 						foundBarber = true
 						fmt.Println("Barber", barber.ID, "started cutting customer", customer.ID, "'s hair.")
 						barber.Start <- customer.ID
+						customer.Start <- barber.ID
 						break
 					}
 				}
 			}
 
 			if customerCount >= 10 && !foundBarber {
+				customer.LineUp <- -1
 				fmt.Println("Customer", customer.ID, "was turned away.")
 			} else if !foundBarber {
 				customers[customerCount] = customer
 				fmt.Println("Customer", customer.ID, "lined up.")
 				customerCount += 1
+				customer.LineUp <- customerCount
 			}
+
 		case id := <-stop:
 			customersServed += 1
+			allCustomers[id.CID-1].Stop <- true
 			fmt.Println("Barber", id.BID, "stopped cutting customer", id.CID, "'s hair.")
 			c := make(chan bool)
 			barbers[id.BID-1].IsBusy <- c
@@ -294,6 +338,7 @@ func main() {
 				customer, _ := RemoveCustomer(customers, 0)
 				fmt.Println("Barber", id.BID, "started cutting customer", customer.ID, "'s hair.")
 				barbers[id.BID-1].Start <- customer.ID
+				customer.Start <- id.BID
 				customerCount -= 1
 			}
 		}
@@ -306,21 +351,29 @@ func main() {
 	char := ""
 	reader := bufio.NewReader(os.Stdin)
 	for char != "q" {
-		fmt.Print("Log: Enter b for barbers, c for customers or q to quit: ")
+		fmt.Print("\nLog: Enter b for barbers, c for customers or q to quit: ")
 		input, _ := reader.ReadString('\n')
 		char = string([]byte(input)[0])
 		if char == "b" {
-			fmt.Print("Barbers: Enter id of barber to view: ")
+			fmt.Print("\nEnter id of barber to view: ")
 			input, _ := reader.ReadString('\n')
 			char = string([]byte(input)[:len(input)-2])
 			i, err := strconv.Atoi(char)
-			if err == nil && i > 0 && i < len(barbers) {
+			if err == nil && i > 0 && i <= len(barbers) {
 				history := make(chan string)
 				barbers[i-1].Log <- history
-				fmt.Println("\n", <-history)
+				fmt.Println("\n" + <-history)
 			}
 		} else if char == "c" {
-
+			fmt.Print("\nEnter id of customer to view: ")
+			input, _ := reader.ReadString('\n')
+			char = string([]byte(input)[:len(input)-2])
+			i, err := strconv.Atoi(char)
+			if err == nil && i > 0 && i <= len(allCustomers) {
+				history := make(chan string)
+				allCustomers[i-1].Log <- history
+				fmt.Println("\n" + <-history)
+			}
 		}
 		// s := make(chan string)
 		// barbers[0].Log <- s
