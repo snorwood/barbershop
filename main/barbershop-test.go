@@ -1,10 +1,12 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"io"
 	"math/rand"
 	"os"
+	"strconv"
 	"time"
 )
 
@@ -160,15 +162,30 @@ type Customer struct {
 	id         int
 	TimeWaited chan chan float32
 	Message    chan string
+	Log        chan chan string
+	Stop       chan bool
+	Kill       chan bool
 }
 
 func (self *Customer) GoLive() {
-	for {
+	finished := false
+
+	for !finished {
 		select {
 		case timeWaited := <-self.TimeWaited:
 			timeWaited <- 0
+
 		case message := <-self.Message:
 			fmt.Fprintln(self.log, message)
+
+		case logger := <-self.Log:
+			logger <- self.log.content
+
+		case <-self.Stop:
+			fmt.Fprint(self.log, "Haircut finished")
+
+		case <-self.Kill:
+			finished = true
 		}
 	}
 }
@@ -177,20 +194,42 @@ type CustomerReader struct {
 	TimeWaited chan chan float32
 	Message    chan string
 	ID         int
+	Log        chan chan string
+	Stop       chan bool
+	Kill       chan bool
 }
 
 func newCustomer(id int) *CustomerReader {
 	timeWaited := make(chan chan float32)
 	message := make(chan string)
+	log := make(chan chan string)
+	stop := make(chan bool)
+	kill := make(chan bool)
 
-	localCustomer := CustomerReader{ID: id, TimeWaited: timeWaited, Message: message}
-	customer := Customer{log: new(SWriter), id: id, TimeWaited: timeWaited, Message: message}
+	localCustomer := CustomerReader{
+		ID:         id,
+		TimeWaited: timeWaited,
+		Message:    message,
+		Log:        log,
+		Stop:       stop,
+		Kill:       kill,
+	}
+	customer := Customer{
+		log:        new(SWriter),
+		id:         id,
+		TimeWaited: timeWaited,
+		Message:    message,
+		Log:        log,
+		Stop:       stop,
+		Kill:       kill,
+	}
+
 	go customer.GoLive()
 
 	return &localCustomer
 }
 
-var numCustomers int = 10
+var numCustomers int = 4
 var numBarbers int = 3
 var variance int = 1
 var haircutBase int = 3
@@ -203,6 +242,7 @@ func main() {
 		barbers[id-1] = newBarber(id, stop)
 	}
 
+	allCustomers := make([]*CustomerReader, numCustomers)
 	customers := make([]*CustomerReader, 10)
 	customerCount := 0
 	customersEntered := 0
@@ -219,6 +259,7 @@ func main() {
 		case <-newCustomerTimer:
 			customersEntered += 1
 			customer := newCustomer(customersEntered)
+			allCustomers[customersEntered-1] = customer
 			fmt.Println("Customer", customer.ID, "entered.")
 			foundBarber := false
 
@@ -260,9 +301,37 @@ func main() {
 
 	for _, barber := range barbers {
 		barber.End <- true
-		s := make(chan string)
-		barber.Log <- s
-		fmt.Println(<-s, "\n")
+	}
+
+	char := ""
+	reader := bufio.NewReader(os.Stdin)
+	for char != "q" {
+		fmt.Print("Log: Enter b for barbers, c for customers or q to quit: ")
+		input, _ := reader.ReadString('\n')
+		char = string([]byte(input)[0])
+		if char == "b" {
+			fmt.Print("Barbers: Enter id of barber to view: ")
+			input, _ := reader.ReadString('\n')
+			char = string([]byte(input)[:len(input)-2])
+			i, err := strconv.Atoi(char)
+			if err == nil && i > 0 && i < len(barbers) {
+				history := make(chan string)
+				barbers[i-1].Log <- history
+				fmt.Println("\n", <-history)
+			}
+		} else if char == "c" {
+
+		}
+		// s := make(chan string)
+		// barbers[0].Log <- s
+		// fmt.Println(<-s, "\n")
+	}
+
+	for _, customer := range allCustomers {
+		customer.Kill <- true
+	}
+
+	for _, barber := range barbers {
 		barber.Kill <- true
 	}
 }
