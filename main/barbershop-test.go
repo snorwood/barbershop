@@ -57,7 +57,9 @@ type Barber struct {
 	Start     chan int
 	TimeSlept chan chan float32
 	IsBusy    chan chan bool
-	Finish    chan chan string
+	Log       chan chan string
+	End       chan bool
+	Kill      chan bool
 }
 
 func (self *Barber) GoLive() {
@@ -71,7 +73,7 @@ func (self *Barber) GoLive() {
 	for !finished {
 		select {
 		case <-haircutTimer:
-			fmt.Fprint(self.log, "Finished cutting customer ", customerID, "'s hair. Cut took ", time.Now().Sub(timeBegin), ".")
+			fmt.Fprint(self.log, "Finished cutting customer ", customerID, "'s hair. Cut took ", int64(time.Now().Sub(timeBegin)/time.Second), " seconds.")
 			timeBegin = time.Now()
 			haircutTimer = nil
 			go func(stop chan IDGroup, id IDGroup) {
@@ -80,7 +82,7 @@ func (self *Barber) GoLive() {
 			}(self.Stop, IDGroup{self.id, customerID})
 
 		case customerID = <-self.Start:
-			fmt.Fprint(self.log, "Started cutting customer ", customerID, "'s hair. Slept for ", time.Now().Sub(timeBegin), ".")
+			fmt.Fprint(self.log, "Started cutting customer ", customerID, "'s hair. Slept for ", int(time.Now().Sub(timeBegin)/time.Second), " seconds.")
 			timeBegin = time.Now()
 			self.busy = true
 			haircutTimer = time.After(time.Duration(int(rand.Int31n(int32(haircutBase)))+variance) * time.Second)
@@ -93,9 +95,13 @@ func (self *Barber) GoLive() {
 
 		case self.busy = <-setBusy:
 
-		case finish := <-self.Finish:
+		case logger := <-self.Log:
+			logger <- self.log.content
+
+		case <-self.End:
 			fmt.Fprint(self.log, "Done for the day. Phew!")
-			finish <- self.log.content
+
+		case <-self.Kill:
 			finished = true
 		}
 	}
@@ -107,14 +113,18 @@ type BarberReader struct {
 	TimeSlept chan chan float32
 	IsBusy    chan chan bool
 	ID        int
-	Finish    chan chan string
+	Log       chan chan string
+	End       chan bool
+	Kill      chan bool
 }
 
 func newBarber(id int, stop chan IDGroup) *BarberReader {
 	start := make(chan int)
 	timeSlept := make(chan chan float32)
 	isBusy := make(chan chan bool)
-	finish := make(chan chan string)
+	log := make(chan chan string)
+	end := make(chan bool)
+	kill := make(chan bool)
 
 	localBarber := &BarberReader{
 		Stop:      stop,
@@ -122,8 +132,11 @@ func newBarber(id int, stop chan IDGroup) *BarberReader {
 		TimeSlept: timeSlept,
 		IsBusy:    isBusy,
 		ID:        id,
-		Finish:    finish,
+		Log:       log,
+		End:       end,
+		Kill:      kill,
 	}
+
 	barber := &Barber{
 		id:        id,
 		log:       new(SWriter),
@@ -132,7 +145,9 @@ func newBarber(id int, stop chan IDGroup) *BarberReader {
 		Start:     start,
 		TimeSlept: timeSlept,
 		IsBusy:    isBusy,
-		Finish:    finish,
+		Log:       log,
+		End:       end,
+		Kill:      kill,
 	}
 
 	go barber.GoLive()
@@ -243,13 +258,12 @@ func main() {
 		}
 	}
 
-	finish := make(chan string, numBarbers)
 	for _, barber := range barbers {
-		barber.Finish <- finish
-	}
-
-	for i := 0; i < numBarbers; i++ {
-		fmt.Println(<-finish)
+		barber.End <- true
+		s := make(chan string)
+		barber.Log <- s
+		fmt.Println(<-s, "\n")
+		barber.Kill <- true
 	}
 }
 
