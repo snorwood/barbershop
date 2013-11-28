@@ -1,0 +1,22 @@
+h1 {
+	font-family: Courier;
+	font-size: 30px;
+	text-decoration: underline;
+}
+
+textarea {
+	font-family: Courier;
+	font-size: 14px;
+	background: gray;
+}
+
+p {
+	font-family: Courier;
+	font-size: 14px;
+}
+
+a {
+	color: black;
+	font-weight: bold;
+
+}
