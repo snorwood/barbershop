@@ -1,4 +1,4 @@
-package main
+package barbershop
 
 import (
 	"bufio"
@@ -306,7 +306,11 @@ const (
 	customerBase int = 1
 )
 
-func main() {
+func (shop *BarberShop) Start() {
+	go shop.simulator()
+}
+
+func (shop *BarberShop) simulator() {
 	// Initialize barbers and channel where they tell you they are done cutting hair
 	stop := make(chan IDGroup)
 	barbers := make([]*BarberReader, numBarbers)
