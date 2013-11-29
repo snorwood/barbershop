@@ -8,6 +8,7 @@ import (
 	"time"
 )
 
+// client communicates with the connections
 type client struct {
 	Recieve chan string
 	ID      int
@@ -17,7 +18,7 @@ type Broker struct {
 	clients        map[int]client
 	newClients     chan client
 	defunctClients chan client
-	messages       chan string
+	Messages       chan string
 	maxID          int
 }
 
@@ -35,7 +36,7 @@ func (self *Broker) Start() {
 				delete(self.clients, defunctClient.ID)
 				log.Println("Removed Client")
 
-			case msg := <-self.messages:
+			case msg := <-self.Messages:
 				for _, client := range self.clients {
 					client.Recieve <- msg
 				}
@@ -115,7 +116,7 @@ func main() {
 	http.Handle("/events/", b)
 	go func() {
 		for i := 0; ; i++ {
-			b.messages <- fmt.Sprintf("%d - the time is %v", i, time.Now().Format("Jan 2 15:04"))
+			b.Messages <- fmt.Sprintf("%d - the time is %v", i, time.Now().Format("Jan 2 15:04"))
 			log.Printf("Sent message %d ", i)
 			time.Sleep(5 * time.Second)
 		}
